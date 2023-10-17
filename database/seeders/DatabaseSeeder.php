@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // Add other seeders here
             BusesTableSeeder::class, 
-            UsersTableSeeder::class
+            UsersTableSeeder::class,
+            BusAttributesTableSeeder::class,
+            UserTypesTableSeeder::class
         ]);
     }
 }

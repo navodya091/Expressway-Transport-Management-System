@@ -21,11 +21,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'phone',
         'email',
+        'nic',
+        'user_type_id',
         'password',
     ];
-
+    
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -51,5 +56,10 @@ class User extends Authenticatable
     public function bus()
     {
         return $this->belongsTo(Bus::class);
+    }
+
+    public function userType()
+    {
+        return $this->belongsTo(UserType::class);
     }
 }

@@ -14,4 +14,5 @@ class UserType extends Model
     const USER_TYPE_MANAGER = 3;
     const USER_TYPE_DRIVER = 4;
     const USER_TYPE_DATA_ENTRY_USER = 5;
+    
 }

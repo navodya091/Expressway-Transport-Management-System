@@ -70,7 +70,7 @@
                                                                 <!-- Action buttons -->
                                                                 <a href="#" class="btn btn-primary">View</a>
                                                                 <a href="#" class="btn btn-warning">Edit</a>
-                                                                <a href="#" class="btn btn-danger">Add Trip</a>
+                                                                <a href="{{route('trip.create',$route->id)}}" class="btn btn-danger">Add Trip</a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

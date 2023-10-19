@@ -5,6 +5,7 @@ namespace App\Modules\RouteManagement\Repositories;
 use App\Models\Route;
 use App\Models\City;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 
 class RouteRepository
@@ -26,6 +27,7 @@ class RouteRepository
 
     public function createDate($data)
     {
+        DB::beginTransaction();
         try {
             // Create a new route record
             $route = Route::create([
@@ -39,9 +41,11 @@ class RouteRepository
          
             
             // Return a success response
+            DB::commit();
             return ['success' => true, 'route' => $route] ;
         } catch (\Exception $e) {
             // Handle the exception
+            DB::rollBack();
             Log::error($e->getMessage()); // Log the exception for debugging
             return ['success' => false];
         }
@@ -50,6 +54,7 @@ class RouteRepository
 
     public function updateRouteStatus($data)
     {
+        DB::beginTransaction();
         try {
             $routeId = $data['routeId'];
             $newStatus = $data['newStatus'];
@@ -60,10 +65,11 @@ class RouteRepository
             $route->save();
          
             // Return a success response
+            DB::commit();
             return ['success' => true];
         } catch (\Exception $e) {
             // Handle the exception 
-            dd($e->getMessage());
+            DB::rollBack();
             Log::error($e->getMessage()); // Log the exception for debugging
             return ['success' => false];
         }

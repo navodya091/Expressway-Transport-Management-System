@@ -45,6 +45,14 @@ Route::prefix('bus')->namespace('App\Modules\BusManagement\Controllers')->middle
     
 });
 
+Route::prefix('user')->namespace('App\Modules\UserManagement\Controllers')->middleware('auth')->group(function () {
+    Route::get('/', 'UserController@index')->name('user.index');
+    Route::get('/create', 'UserController@create')->name('user.create');
+    Route::post('/store', 'UserController@store')->name('user.store');
+    Route::post('/update-user-status', 'UserController@updateUserStatus')->name('user.status');
+    
+});
+
 Route::prefix('route')->namespace('App\Modules\RouteManagement\Controllers')->middleware('auth')->group(function () {
     Route::get('/', 'RouteController@index')->name('route.index');
     Route::get('/create', 'RouteController@create')->name('route.create');
@@ -66,6 +74,5 @@ Route::prefix('report')->middleware(['auth', 'user.type:' . UserType::USER_TYPE_
     ->group(function () {
         Route::get('/', 'ReportController@index')->name('report.index');
         Route::get('/generate-report', 'ReportController@generateReport')->name('report.generate');
-
-        
+    
 });

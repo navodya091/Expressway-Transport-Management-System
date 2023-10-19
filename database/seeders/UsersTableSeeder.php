@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'user_type_id' => 2,
-                'password' => Hash::make(Str::random(8)), 
+                'password' => '$2y$10$axM1qS8P5Z99li8F.mKWTOehQDNsBZGOHxyKaXHqIzJAV5YZ8Kw6q', 
                 'nic' => '928563713v',
                 'first_name' => 'Gayan',
                 'last_name' => 'Sanjeewa',
@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'user_type_id' => 3,
-                'password' => Hash::make(Str::random(8)), 
+                'password' => '$2y$10$axM1qS8P5Z99li8F.mKWTOehQDNsBZGOHxyKaXHqIzJAV5YZ8Kw6q', 
                 'nic' => '938463713v',
                 'first_name' => 'Sameera',
                 'last_name' => 'Samarawickrama',
@@ -49,7 +49,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'user_type_id' => 5,
-                'password' => Hash::make(Str::random(8)), 
+                'password' => '$2y$10$axM1qS8P5Z99li8F.mKWTOehQDNsBZGOHxyKaXHqIzJAV5YZ8Kw6q', 
                 'nic' => '908563713v',
                 'first_name' => 'Isira',
                 'last_name' => 'Samaraweera',

@@ -60,10 +60,10 @@
                                                             <td>{{ $route->id }}</td>
                                                             <td>{{ $route->route_number }}</td>
                                                             <td>{{ $route->description }}</td>
-                                                            <td>{{ $route->startOutboundCity->city_name}}</td>
-                                                            <td>{{ $route->endOutboundCity->city_name}}</td>
-                                                            <td>{{ $route->startInboundCity->city_name}}</td>
-                                                            <td>{{ $route->endInboundCity->city_name}}</td>
+                                                            <td>{{ isset($route->startOutboundCity) ? $route->startOutboundCity->city_name : ''}}</td>
+                                                            <td>{{ isset($route->endOutboundCity) ? $route->endOutboundCity->city_name : ''}}</td>
+                                                            <td>{{ isset($route->startInboundCity) ? $route->startInboundCity->city_name : ''}}</td>
+                                                            <td>{{ isset($route->endInboundCity) ? $route->endInboundCity->city_name : ''}}</td>
                                                             <td>
                                                                
                                                                 <label class="switch">

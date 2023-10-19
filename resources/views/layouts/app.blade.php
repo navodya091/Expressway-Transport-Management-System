@@ -13,18 +13,19 @@
     <div class="container-fluid">
         <header class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0">
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">
-                <!-- Add your common heading with matching colors and space -->
+              
                 <span style="color: white;">Expressway</span>
-                &nbsp;&nbsp;&nbsp;&nbsp; <!-- Add extra spaces as needed -->
+                &nbsp;&nbsp;&nbsp;&nbsp; 
             </a>
-            <div class="text-end"> <!-- Add this div for right alignment -->
-                @if(Auth::check()) <!-- Check if user is authenticated -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Logout</button>
-                </form>
-                @endif
-            </div>
+            @if (Auth::check()) <!-- Check if the user is authenticated -->
+                <div class="d-flex align-items-center">
+                    <span>{{ Auth::user()->first_name . ' ' .Auth::user()->last_name }}</span> &nbsp;&nbsp;&nbsp;&nbsp; 
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                </div>
+            @endif
         </header>
 
         <div class="row">
@@ -32,7 +33,7 @@
             @include('sidebar') <!-- Include the sidebar -->
       
             <main class="col-md-8 ms-sm-auto col-lg-9 px-md-4">
-                @yield('content') <!-- This is where your content goes -->
+                @yield('content') 
             </main>
         
         </div>

@@ -122,6 +122,30 @@ class UserRepository
         }
     }
 
+    public function deleteData($id)
+    {
+        DB::beginTransaction();
+        try {
+
+            $user = User::find($id);
+
+            if (!$user) {
+                return ['success' => false];
+            }
+    
+            $user->delete();
+         
+            // Return a success response
+            DB::commit();
+            return ['success' => true];
+        } catch (\Exception $e) {
+            // Handle the exception 
+            DB::rollBack();
+            Log::error($e->getMessage()); // Log the exception for debugging
+            return ['success' => false];
+        }
+    }
+
     
 
 }

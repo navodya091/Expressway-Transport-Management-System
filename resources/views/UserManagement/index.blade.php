@@ -8,6 +8,10 @@
             font-size: 12px; 
         }
 
+        .icon-button {
+            margin-right: 10px;
+        }
+        
         .create-button {
             display: flex;
             justify-content: flex-end;
@@ -58,17 +62,24 @@
                                                             <td>{{ $user->nic }}</td>
                                                             <td>{{ $user->userType->user_type }}</td>
                                                             <td>
-                                                                <!-- Toggle button for user status -->
                                                                 <label class="switch">
                                                                     <input type="checkbox" id="userStatus{{ $user->id }}" @if($user->status == \App\Models\User::ACTIVE_USER) checked @endif>
                                                                     <span class="slider round"></span>
                                                                 </label>
                                                             </td>
                                                             <td>
-                                                                <!-- Action buttons (You can link to user view, edit, and delete pages) -->
-                                                                <a href="" class="btn btn-primary">View</a>
-                                                                <a href="{{route('user.edit',$user->id)}}" class="btn btn-warning">Edit</a>
-                                                                <!-- You can add a button for deleting users -->
+                                                               <!-- Action buttons -->
+                                                               <div class="btn-group">
+                                                                    <a href="{{ route('user.show', $user->id) }}" class="btn btn-primary btn-sm icon-button">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm icon-button">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+                                                                    <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger btn-sm icon-button delete-button" id="delete{{ $user->id }}">
+                                                                        <i class="fas fa-trash"></i> 
+                                                                    </a>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -96,46 +107,47 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
 <script>
-    $(document).ready(function() {
-        // Attach a change event handler to the checkbox
-        $('input[type="checkbox"]').on('change', function() {
-            // Get the ID of the clicked checkbox
-            const checkboxId = $(this).attr('id');
-            const newStatus = this.checked ? 1 : 0;
-            const csrfToken = $('meta[name="csrf-token"]').attr('content');
+$(document).ready(function() {
+    
+    $('input[type="checkbox"]').on('change', function() {
+        // Get the ID of the clicked checkbox
+        const checkboxId = $(this).attr('id');
+        const newStatus = this.checked ? 1 : 0;
+        const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-            $.ajax({
-                url: 'user/update-user-status', // Adjust the URL to match your route
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                data: JSON.stringify({ newStatus, userId: checkboxId.replace('userStatus', '') }),
-                contentType: 'application/json',
-                dataType: 'json',
-                success: function(data) {
-                    if (data.success) {
-                        // Display a SweetAlert2 success message
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: data.success,
-                        });
-                        // You can update the UI elements or take other actions on success
-                    } else {
-                        // Display a SweetAlert2 error message
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: data.error,
-                        });
-                        // You can show an error message or handle the error in the UI
-                    }
-                },
-                error: function(error) {
-                    console.error('Error:', error);
+        $.ajax({
+            url: 'user/update-user-status', 
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            data: JSON.stringify({ newStatus, userId: checkboxId.replace('userStatus', '') }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(data) {
+                if (data.success) {
+                    // Display a SweetAlert2 success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: data.success,
+                    });
+                    
+                } else {
+                    // Display a SweetAlert2 error message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.error,
+                    });
+                    
                 }
-            });
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
         });
     });
+});
+
 </script>

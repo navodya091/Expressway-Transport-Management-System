@@ -5,7 +5,11 @@
        /* CSS file */
 
         .table th {
-            font-size: 12px; /* Adjust the font size as needed */
+            font-size: 12px; 
+        }
+        
+        .icon-button {
+            margin-right: 10px;
         }
 
         .create-button {
@@ -13,6 +17,7 @@
             justify-content: flex-end;
             margin-bottom: 10px;
         }
+        
     </style>
 
     <div class="container">
@@ -60,18 +65,29 @@
                                                             <td>{{ $route->startInboundCity->city_name}}</td>
                                                             <td>{{ $route->endInboundCity->city_name}}</td>
                                                             <td>
-                                                                <!-- Toggle button for status -->
+                                                               
                                                                 <label class="switch">
                                                                     <input type="checkbox" id="routeStatus{{ $route->id }}"  @if($route->status == \App\Models\Route::ACTIVE_ROUTE) checked @endif>
                                                                     <span class="slider round"></span>
                                                                 </label>
                                                             </td>
                                                             <td>
-                                                                <!-- Action buttons -->
-                                                                <a href="#" class="btn btn-primary">View</a>
-                                                                <a href="{{route('route.edit',$route->id)}}" class="btn btn-warning">Edit</a>
-                                                                <a href="{{route('trip.create',$route->id)}}" class="btn btn-danger">Add Trip</a>
-                                                            </td>
+                                                            <div class="btn-group">
+                                                                <a href="{{ route('route.show', $route->id) }}" class="btn btn-primary btn-sm icon-button">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                                <a href="{{ route('route.edit', $route->id) }}" class="btn btn-warning btn-sm icon-button">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <a href="{{ route('trip.create', $route->id) }}" class="btn btn-success btn-sm icon-button">
+                                                                    <i class="fas fa-plus"></i>
+                                                                </a>
+                                                                <a href="{{ route('route.delete', $route->id) }}" id="delete" class="btn btn-danger btn-sm icon-button delete-button">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            </div>
+
+                                                        </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -99,7 +115,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
 <script>
     $(document).ready(function() {
-    // Attach a change event handler to the checkbox
+ 
     $('input[type="checkbox"]').on('change', function() {
         // Get the ID of the clicked checkbox
         const checkboxId = $(this).attr('id');
@@ -107,7 +123,7 @@
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: 'route/update-route-status', // Adjust the URL to match your route
+            url: 'route/update-route-status', 
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': csrfToken
@@ -123,7 +139,7 @@
                         title: 'Success',
                         text: data.success,
                     });
-                    // You can update the UI elements or take other actions on success
+                   
                 } else {
                     // Display a SweetAlert2 error message
                     Swal.fire({
@@ -131,7 +147,7 @@
                         title: 'Error',
                         text: data.error,
                     });
-                    // You can show an error message or handle the error in the UI
+                    
                 }
             },
             error: function(error) {
@@ -140,4 +156,5 @@
         });
     });
 });
+
 </script>

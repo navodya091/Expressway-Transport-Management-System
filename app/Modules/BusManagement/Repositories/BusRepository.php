@@ -121,4 +121,28 @@ class BusRepository
             return ['success' => false];
         }
     }
+
+    public function deleteData($id)
+    {
+        DB::beginTransaction();
+        try {
+
+            $bus = Bus::find($id);
+
+            if (!$bus) {
+                return ['success' => false];
+            }
+    
+            $bus->delete();
+         
+            // Return a success response
+            DB::commit();
+            return ['success' => true];
+        } catch (\Exception $e) {
+            // Handle the exception 
+            DB::rollBack();
+            Log::error($e->getMessage()); // Log the exception for debugging
+            return ['success' => false];
+        }
+    }
 }

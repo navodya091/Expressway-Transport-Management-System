@@ -92,8 +92,6 @@
                                 @endif
                             </div>
 
-                            <!-- Continue with the rest of the form fields -->
-
                             <button type="submit" class="btn btn-primary">Save & Next</button>
                         </form>
                     </div>

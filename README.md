@@ -21,44 +21,61 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+# Expressway Transport Management System
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Automated Transpotation Management System
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Main Modules
 
-## Laravel Sponsors
+- Authentication Module
+- Dashboard
+- User Management
+- Bus Management
+- Route Management
+- Trip Management
+- Report Generation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## Getting Started
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+1. Clone the repository: `git clone https://github.com/navodya091/Expressway-Transport-Management-System.git`
+2. Install dependencies: `composer install`
+3. Create a `.env` file and set your database configuration.
+5. Generate a unique application key: `php artisan key:generate`
+6. Run migrations: `php artisan migrate`
+7. Run seeders: `php artisan db:seed`
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+
+## Acknowledgments
+
+This Laravel project would not have been possible without the use of several open-source libraries, tools, and resources. We would like to acknowledge and express our gratitude to the following:
+
+- **Laravel Framework**: We are immensely thankful to the Laravel community and the creators of this powerful PHP framework for making web development in PHP enjoyable and efficient.
+
+- **Composer**: A huge shoutout to Composer, the PHP package manager, for simplifying the process of managing project dependencies.
+
+- **Bootstrap**: We utilized the Bootstrap framework for building the project's responsive and user-friendly user interface. Thanks to the Bootstrap team for this amazing tool.
+
+- **jQuery**: Special thanks to the jQuery team for creating the JavaScript library that made client-side scripting and DOM manipulation a breeze.
+
+- **SweetAlert2**: We express our appreciation to SweetAlert2 for providing elegant and customizable pop-up dialogs to enhance user experience.
+
+- **Font Awesome**: The project is made more visually appealing and feature-rich thanks to Font Awesome icons, which are both stylish and functional.
+
+- **PHPUnit**: We want to thank PHPUnit for its invaluable role in ensuring the quality and reliability of our application through automated testing.
+
+- **GitHub**: We hosted our project on GitHub, which facilitated version control, collaboration, and open-source contributions. Thanks to the GitHub team for providing a fantastic platform for developers.
+
+- **Laracasts**: A special mention goes to Laracasts for their insightful tutorials and resources that have helped us enhance our Laravel skills.
+
+- **Stack Overflow**: We are grateful to the Stack Overflow community for their support and answers to various programming questions, which helped us overcome numerous challenges during development.
+
+- **The Laravel Community**: Our heartfelt thanks to the Laravel community, including package authors, forum contributors, and fellow developers, who create, share, and support Laravel-related content.
+
+We couldn't have completed this project without the collective effort of these resources and the Laravel community. Thank you!
+

@@ -25,6 +25,13 @@ class RouteController extends Controller
         return view('RouteManagement.index', ['routes' => $routes]);
     }
 
+    public function show($id)
+    {
+        $route = $this->routeRepository->getById($id);
+        $cities = $this->routeRepository->getAllCities();
+        return view('RouteManagement.show', ['cities' => $cities, 'route'=>$route]);
+    }
+
     public function create()
     {
         $cities = $this->routeRepository->getAllCities();
@@ -43,7 +50,9 @@ class RouteController extends Controller
         $data = $this->routeRepository->createData($request->all());
 
         if ($data['success']) {
-            return redirect()->route('trip.create', ['route_id' => $data['route']['id'],'route' => $data['route'],])->with('success', 'Route created successfully.');
+            
+            return redirect()->route('trip.create', ['id' => $data['route']['id'], 'route' => $data['route']]);
+
         } else {
             return redirect()->back()->with('error', 'Failed to create a new route. Please try again.');
         }
@@ -74,6 +83,17 @@ class RouteController extends Controller
     
         }
         
+    }
+
+    public function delete($id)
+    {
+        $data = $this->routeRepository->deleteData($id);
+
+        if ($data['success']) {
+            return response()->json(['success' => 'Route deleted successfully']);
+        } else {
+            return response()->json(['error' => 'Failed to delete. Please try again.']);
+        }
     }
 
 

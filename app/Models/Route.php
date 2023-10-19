@@ -21,4 +21,24 @@ class Route extends Model
         'end_point_inbound',
         'status',
     ];
+
+    public function startOutboundCity()
+    {
+        return $this->belongsTo(City::class, 'start_point_outbound');
+    }
+
+    public function endOutboundCity()
+    {
+        return $this->belongsTo(City::class, 'end_point_outbound');
+    }
+
+    public function startInboundCity()
+    {
+        return $this->belongsTo(City::class, 'start_point_inbound');
+    }
+
+    public function endInboundCity()
+    {
+        return $this->belongsTo(City::class, 'end_point_inbound');
+    }
 }

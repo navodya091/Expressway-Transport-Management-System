@@ -108,10 +108,10 @@
                                                 <td>{{$trip->id}}</td>
                                                 <td>{{$trip->bus->bus_number}}</td>
                                                 <td>{{$trip->route->route_number}}</td>
-                                                <td>{{$trip->route->start_point_outbound}}</td>
-                                                <td>{{$trip->route->end_point_outbound}}</td>
-                                                <td>{{$trip->route->start_point_inbound}}</td>
-                                                <td>{{$trip->route->end_point_inbound}}</td>
+                                                <td>{{$trip->route->startOutboundCity->city_name}}</td>
+                                                <td>{{$trip->route->endOutboundCity->city_name}}</td>
+                                                <td>{{$trip->route->startInboundCity->city_name}}</td>
+                                                <td>{{$trip->route->endInboundCity->city_name}}</td>
                                                 <td>{{$trip->bus->user->first_name . ' ' . $trip->bus->user->last_name}}</td>
                                                 <td>{{$trip->arrival_time}}</td>
                                                 <td>{{$trip->departure_time}}</td>

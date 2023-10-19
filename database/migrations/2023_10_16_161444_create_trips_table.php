@@ -19,8 +19,8 @@ class CreateTripsTable extends Migration
             $table->integer('route_id')->nullable(); 
             $table->integer('bus_id')->nullable(); 
             $table->string('direction', 255)->nullable(); 
-            $table->dateTime('departure_time')->nullable(); 
-            $table->dateTime('arrival_time')->nullable(); 
+            $table->time('departure_time')->nullable(); 
+            $table->time('arrival_time')->nullable(); 
             $table->tinyInteger('status', false, true)->default(1); // Default status is 1 (active)
             // Other columns
 

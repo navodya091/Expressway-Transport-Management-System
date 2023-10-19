@@ -20,9 +20,9 @@ class DashboardRepository
             $data['data_entry_users'] =  $users->where('user_type_id', UserType::USER_TYPE_DATA_ENTRY_USER)->count();
             $data['drivers'] = $users->where('user_type_id', UserType::USER_TYPE_DRIVER)->count();
             $data['buses'] = $buses->count();
-          
+           
             return $data;
-        } catch (\Exception $e) {
+        } catch (\Exception $e) { 
             // Handle the exception or log it as needed
             return null;
         }

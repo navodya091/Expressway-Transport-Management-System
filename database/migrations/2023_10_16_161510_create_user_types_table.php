@@ -14,8 +14,10 @@ class CreateUserTypesTable extends Migration
     public function up()
     {
         Schema::create('user_types', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Auto-incremental primary key
+            $table->string('user_type', 255); // VARCHAR(255) column
+            $table->tinyInteger('status')->default(1)->comment('1 = active, 2 = deactive');
+            $table->timestamps(); // Created at and updated at timestamps
         });
     }
 
@@ -26,6 +28,6 @@ class CreateUserTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_types');
+        Schema::dropIfExists('user_type');
     }
 }

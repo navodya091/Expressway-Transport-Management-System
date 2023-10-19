@@ -14,9 +14,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // Add other seeders here
             BusesTableSeeder::class, 
-            UsersTableSeeder::class
+            UsersTableSeeder::class,
+            BusAttributesSeeder::class,
+            RouteSeeder::class,
+            TripsTableSeeder::class,
+            UserTypesSeeder::class
         ]);
     }
 }

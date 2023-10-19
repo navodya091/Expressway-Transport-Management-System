@@ -14,8 +14,15 @@ class CreateBusAttributesTable extends Migration
     public function up()
     {
         Schema::create('bus_attributes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Auto-incremental primary key
+            $table->integer('bus_id');
+            $table->integer('year_of_manufacture')->nullable();
+            $table->string('manufacturer', 255)->nullable();
+            $table->integer('seating_capacity')->nullable();
+            $table->string('fuel_type', 255)->nullable();
+            $table->boolean('ac');
+            $table->date('insurance_expireDate')->nullable();
+            $table->timestamps(); // Created at and updated at timestamps
         });
     }
 

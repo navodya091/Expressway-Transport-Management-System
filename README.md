@@ -44,6 +44,7 @@ Automated Transpotation Management System
 5. Generate a unique application key: `php artisan key:generate`
 6. Run migrations: `php artisan migrate`
 7. Run seeders: `php artisan db:seed`
+8. Run project: `php artisan serve`
 
 
 ## License

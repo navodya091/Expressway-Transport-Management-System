@@ -27,5 +27,14 @@ class Bus extends Model
         return $this->hasOne(BusAttribute::class);
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class,'id', 'driver_id');
+    }
 
+
+    public function trips()
+    {
+        return $this->hasMany(Trip::class, 'bus_id', 'id');
+    }
 }

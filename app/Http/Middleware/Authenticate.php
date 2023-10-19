@@ -19,11 +19,11 @@ class Authenticate extends Middleware
                 return response('Unauthorized.', 401);
             }
             else{
-                return route('login.view');
+                return route('login.show');
             }
         }
         if (! $request->expectsJson()) {
-            return route('login.view');
+            return route('login.show');
         }
     }
 }

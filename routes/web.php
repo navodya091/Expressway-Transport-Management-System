@@ -17,7 +17,7 @@ use App\Models\UserType;
 
 //Auth routes
 Route::namespace('App\Http\Controllers\Auth')->group(function () {
-    Route::get('/', 'LoginController@loginView')->name('login.view');
+    Route::get('/', 'LoginController@loginView')->name('login.show');
     Route::post('/login', 'LoginController@login')->name('login');
     Route::post('/logout', 'LoginController@logout')->name('logout');
     
@@ -34,7 +34,7 @@ Route::middleware(['auth', 'user.type:' . UserType::USER_TYPE_MANAGER . '|' . Us
     ->group(function () {
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
         
-    });
+});
 
 
 Route::prefix('bus')->namespace('App\Modules\BusManagement\Controllers')->middleware('auth')->group(function () {
@@ -59,4 +59,13 @@ Route::prefix('trip')->namespace('App\Modules\TripManagement\Controllers')->midd
     Route::post('/store', 'TripController@store')->name('trip.store');
     Route::post('/update-trip-status', 'TripController@updateTripStatus')->name('trip.status');
     
+});
+
+Route::prefix('report')->middleware(['auth', 'user.type:' . UserType::USER_TYPE_MANAGER . '|' . UserType::USER_TYPE_OWNER])
+    ->namespace('App\Modules\ReportManagement\Controllers')
+    ->group(function () {
+        Route::get('/', 'ReportController@index')->name('report.index');
+        Route::get('/generate-report', 'ReportController@generateReport')->name('report.generate');
+
+        
 });

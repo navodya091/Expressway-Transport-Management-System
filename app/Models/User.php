@@ -44,4 +44,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Define the inverse of the one-to-one relationship with the Bus model.
+     */
+    public function bus()
+    {
+        return $this->belongsTo(Bus::class);
+    }
 }

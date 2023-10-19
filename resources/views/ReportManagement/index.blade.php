@@ -98,8 +98,8 @@
                                                 <th>Start Inbound</th>
                                                 <th>End Inbound</th>
                                                 <th>Driver Name</th>
-                                                <th>Arival Time</th>
                                                 <th>Depature Time</th>
+                                                <th>Arival Time</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -113,9 +113,8 @@
                                                 <td>{{$trip->route->startInboundCity->city_name}}</td>
                                                 <td>{{$trip->route->endInboundCity->city_name}}</td>
                                                 <td>{{$trip->bus->user->first_name . ' ' . $trip->bus->user->last_name}}</td>
-                                                <td>{{$trip->arrival_time}}</td>
                                                 <td>{{$trip->departure_time}}</td>
-                                                
+                                                <td>{{$trip->arrival_time}}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>

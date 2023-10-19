@@ -92,8 +92,6 @@
                                 </div>
                             </div>
 
-                            <!-- Continue with the rest of the form fields -->
-
                             <button type="submit" name="action" value="save" class="btn btn-primary">Save</button>
 
                             <button type="submit" name="action" value="confirm" class="btn btn-primary">Confirm & Next</button>

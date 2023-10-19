@@ -17,6 +17,11 @@ class TripRepository
         return Trip::with('bus')->paginate($perPage);
     }
 
+    public function getById($id)
+    {
+        return Trip::where('id',$id)->first();
+    }
+
     public function getAllBusses()
     {
         return Bus::where('status',Bus::ACTIVE_BUS)->get();
@@ -69,37 +74,28 @@ class TripRepository
     {
         DB::beginTransaction();
         try {
-            // Check if the route_id exists in the data
-            if ($data['route_id']) {
-                // Find the route by ID
-                $route = Route::find($data['route_id']);
-            } else {
-                $route = null;
-            }
-
+           
             // Update the trip records based on their direction (Inbound or Outbound)
-            if ($data['inbound_bus_id'] && $data['inbound_arrival_time'] && $data['inbound_departure_time']) {
+            if (isset($data['inbound_bus_id']) && isset($data['inbound_arrival_time']) && isset($data['inbound_departure_time'])) {
                 $inboundTrip = Trip::find($id);
 
                 if ($inboundTrip) {
                     $inboundTrip->update([
-                        'route_id' => $data['route_id'],
                         'bus_id' => $data['inbound_bus_id'],
-                        'direction' => 'Inbound',
+                        'direction' => 'inbound',
                         'departure_time' => Carbon::parse($data['inbound_arrival_time']),
                         'arrival_time' => Carbon::parse($data['inbound_departure_time']),
                     ]);
                 }
             }
 
-            if ($data['outbound_bus_id'] && $data['outbound_arrival_time'] && $data['outbound_departure_time']) {
+            if (isset($data['outbound_bus_id']) && isset($data['outbound_arrival_time']) && isset($data['outbound_departure_time'])) {
                 $outboundTrip = Trip::find($id);
 
                 if ($outboundTrip) {
                     $outboundTrip->update([
-                        'route_id' => $data['route_id'],
                         'bus_id' => $data['outbound_bus_id'],
-                        'direction' => 'Outbound',
+                        'direction' => 'outbound',
                         'departure_time' => Carbon::parse($data['outbound_arrival_time']),
                         'arrival_time' => Carbon::parse($data['outbound_departure_time']),
                     ]);
@@ -108,10 +104,10 @@ class TripRepository
 
             // Return a success response
             DB::commit();
-            return ['success' => true, 'route' => $route];
+            return ['success' => true];
         } catch (\Exception $e) {
             // Handle the exception
-            DB::rollBack();
+            DB::rollBack(); 
             Log::error($e->getMessage()); // Log the exception for debugging
             return ['success' => false];
         }
@@ -130,6 +126,30 @@ class TripRepository
             $route = Trip::find($tripId);
             $route->status = $newStatus;
             $route->save();
+         
+            // Return a success response
+            DB::commit();
+            return ['success' => true];
+        } catch (\Exception $e) {
+            // Handle the exception 
+            DB::rollBack();
+            Log::error($e->getMessage()); // Log the exception for debugging
+            return ['success' => false];
+        }
+    }
+
+    public function deleteData($id)
+    {
+        DB::beginTransaction();
+        try {
+
+            $trip = Trip::find($id);
+
+            if (!$trip) {
+                return ['success' => false];
+            }
+    
+            $trip->delete();
          
             // Return a success response
             DB::commit();

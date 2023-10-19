@@ -26,6 +26,13 @@ class UserController extends Controller
         return view('UserManagement.index', ['users' => $users]);
     }
 
+    public function show($id)
+    {
+        $user = $this->userRepository->getById($id);
+        $userTypes = $this->userRepository->getAllUserTypes();
+        return view('UserManagement.show', ['userTypes' => $userTypes,'user'=> $user]);
+    }
+
     public function create()
     {
         $userTypes = $this->userRepository->getAllUserTypes();
@@ -73,6 +80,17 @@ class UserController extends Controller
     
         }
         
+    }
+
+    public function delete($id)
+    {
+        $data = $this->userRepository->deleteData($id);
+
+        if ($data['success']) {
+            return response()->json(['success' => 'User deleted successfully']);
+        } else {
+            return response()->json(['error' => 'Failed to delete. Please try again.']);
+        }
     }
 
 

@@ -25,6 +25,13 @@ class BusController extends Controller
         return view('BusManagement.index', ['buses' => $buses]);
     }
 
+    public function show($id)
+    {
+        $buse = $this->busRepository->getById($id);
+        $drivers = $this->busRepository->getAllBusDrivers();
+        return view('BusManagement.show', ['drivers' => $drivers, 'bus' => $buse]);
+    }
+
     public function create()
     {
         $drivers = $this->busRepository->getAllBusDrivers();
@@ -73,6 +80,17 @@ class BusController extends Controller
     
         }
         
+    }
+
+    public function delete($id)
+    {
+        $data = $this->busRepository->deleteData($id);
+
+        if ($data['success']) {
+            return response()->json(['success' => 'Bus deleted successfully']);
+        } else {
+            return response()->json(['error' => 'Failed to delete. Please try again.']);
+        }
     }
 
 

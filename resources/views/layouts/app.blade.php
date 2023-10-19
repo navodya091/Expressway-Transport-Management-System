@@ -5,6 +5,7 @@
 
     <!-- Add the Bootstrap CSS link -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
 </head>
@@ -40,5 +41,6 @@
     <!-- Add the Bootstrap JavaScript link at the end of the body -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/common.js') }}"></script>
 </body>
 </html>

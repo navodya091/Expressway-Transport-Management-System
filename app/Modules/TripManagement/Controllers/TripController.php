@@ -27,6 +27,13 @@ class TripController extends Controller
         return view('TripManagement.index', ['trips' => $trips]);
     }
 
+    public function show($id)
+    {
+        $trip = $this->tripRepository->getById($id);
+        $buses = $this->tripRepository->getAllBusses();
+        return view('TripManagement.show', ['buses' => $buses,'trip' => $trip, ]);
+    }
+
     public function create($id)
     {
         $route = $this->routeRepository->getById($id);
@@ -36,9 +43,9 @@ class TripController extends Controller
 
     public function edit($id)
     {
-        $route = $this->routeRepository->getById($id);
+        $trip = $this->tripRepository->getById($id);
         $buses = $this->tripRepository->getAllBusses();
-        return view('TripManagement.edit', ['buses' => $buses,'route' => $route, ]);
+        return view('TripManagement.edit', ['buses' => $buses, 'trip' => $trip]);
     }
 
     public function update(TripUpdateRequest $request, $id)
@@ -91,6 +98,16 @@ class TripController extends Controller
         
     }
 
+    public function delete($id)
+    {
+        $data = $this->tripRepository->deleteData($id);
+
+        if ($data['success']) {
+            return response()->json(['success' => 'Trip deleted successfully']);
+        } else {
+            return response()->json(['error' => 'Failed to delete. Please try again.']);
+        }
+    }
 
 
 }

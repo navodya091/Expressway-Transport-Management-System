@@ -8,6 +8,10 @@
             font-size: 12px; /* Adjust the font size as needed */
         }
 
+        .icon-button {
+            margin-right: 10px;
+        }
+
         .create-button {
             display: flex;
             justify-content: flex-end;
@@ -65,7 +69,7 @@
 
                                                             <td>{{ $bus->busAttribute->insurance_expireDate }}</td>
                                                             <td>
-                                                                <!-- Toggle button for status -->
+                                                             
                                                                 <label class="switch">
                                                                     <input type="checkbox" id="busStatus{{ $bus->id }}"  @if($bus->status == \App\Models\Bus::ACTIVE_BUS) checked @endif>
                                                                     <span class="slider round"></span>
@@ -73,9 +77,17 @@
                                                             </td>
                                                             <td>
                                                                 <!-- Action buttons -->
-                                                                <a href="#" class="btn btn-primary">View</a>
-                                                                <a href="{{route('bus.edit',$bus->id)}}" class="btn btn-warning">Edit</a>
-                                                                <a href="#" class="btn btn-danger">Maintenance</a>
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('bus.show', $bus->id) }}" class="btn btn-primary btn-sm icon-button">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="{{ route('bus.edit', $bus->id) }}" class="btn btn-warning btn-sm icon-button">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+                                                                    <a href="{{ route('bus.delete', $bus->id) }}" class="btn btn-danger btn-sm icon-button delete-button" id="delete">
+                                                                        <i class="fas fa-trash"></i> 
+                                                                    </a>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -104,15 +116,15 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
 <script>
     $(document).ready(function() {
-    // Attach a change event handler to the checkbox
+ 
     $('input[type="checkbox"]').on('change', function() {
-        // Get the ID of the clicked checkbox
+       
         const checkboxId = $(this).attr('id');
         const newStatus = this.checked ? 1 : 0;
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: 'bus/update-bus-status', // Adjust the URL to match your route
+            url: 'bus/update-bus-status', 
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': csrfToken
@@ -128,7 +140,7 @@
                         title: 'Success',
                         text: data.success,
                     });
-                    // You can update the UI elements or take other actions on success
+                    
                 } else {
                     // Display a SweetAlert2 error message
                     Swal.fire({
@@ -136,7 +148,7 @@
                         title: 'Error',
                         text: data.error,
                     });
-                    // You can show an error message or handle the error in the UI
+                    
                 }
             },
             error: function(error) {

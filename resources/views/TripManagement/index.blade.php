@@ -8,6 +8,10 @@
             font-size: 12px; /* Adjust the font size as needed */
         }
 
+        .icon-button {
+            margin-right: 10px;
+        }
+
         .create-button {
             display: flex;
             justify-content: flex-end;
@@ -49,11 +53,11 @@
                                                         <tr>
                                                             <td>{{ $trip->id }}</td>
                                                             <td>{{ $trip->route_id }}</td>
-                                                            <td>{{ $trip->bus->bus_number }}</td>
+                                                            <td>{{ isset($trip->bus) ? $trip->bus->bus_number : '' }}</td>
                                                             <td>{{ $trip->departure_time }}</td>
                                                             <td>{{ $trip->arrival_time }}</td>
                                                             <td>
-                                                                <!-- Toggle button for status -->
+                                                              
                                                                 <label class="switch">
                                                                     <input type="checkbox" id="tripStatus{{ $trip->id }}"  @if($trip->status == \App\Models\Trip::ACTIVE_TRIP) checked @endif>
                                                                     <span class="slider round"></span>
@@ -61,8 +65,18 @@
                                                             </td>
                                                             <td>
                                                                 <!-- Action buttons -->
-                                                                <a href="#" class="btn btn-primary">View</a>
-                                                                <a href="#" class="btn btn-warning">Edit</a>
+                                                                <div class="btn-group">
+                                                                    <a href="{{ route('trip.show', $trip->id) }}" class="btn btn-primary btn-sm icon-button">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="{{ route('trip.edit', $trip->id) }}" class="btn btn-warning btn-sm icon-button">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </a>
+                                                                    <a href="{{ route('trip.delete', $trip->id) }}" class="btn btn-danger btn-sm icon-button delete-button" id="delete">
+                                                                        <i class="fas fa-trash"></i> 
+                                                                    </a>
+                                                                </div>
+                                                                
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -91,7 +105,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
 <script>
     $(document).ready(function() {
-    // Attach a change event handler to the checkbox
+ 
     $('input[type="checkbox"]').on('change', function() {
         // Get the ID of the clicked checkbox
         const checkboxId = $(this).attr('id');

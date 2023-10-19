@@ -38,8 +38,7 @@ class RouteRepository
                 'start_point_inbound' => $data['start_inbound'],
                 'end_point_inbound' => $data['end_inbound'],
             ]);
-         
-            
+     
             // Return a success response
             DB::commit();
             return ['success' => true, 'route' => $route] ;
@@ -92,6 +91,30 @@ class RouteRepository
             $route = Route::find($routeId);
             $route->status = $newStatus;
             $route->save();
+         
+            // Return a success response
+            DB::commit();
+            return ['success' => true];
+        } catch (\Exception $e) {
+            // Handle the exception 
+            DB::rollBack();
+            Log::error($e->getMessage()); // Log the exception for debugging
+            return ['success' => false];
+        }
+    }
+
+    public function deleteData($id)
+    {
+        DB::beginTransaction();
+        try {
+
+            $route = Route::find($id);
+
+            if (!$route) {
+                return ['success' => false];
+            }
+    
+            $route->delete();
          
             // Return a success response
             DB::commit();

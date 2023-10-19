@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Modules\TripManagement\Repositories;
+
+use App\Models\Trip;
+use App\Models\Bus;
+use Carbon\Carbon;
+use App\Models\Route;
+use Illuminate\Support\Facades\Log;
+
+
+class TripRepository
+{
+    public function getAll($perPage = 10)
+    {
+        return Trip::with('bus')->paginate($perPage);
+    }
+
+    public function getAllBusses()
+    {
+        return Bus::where('status',Bus::ACTIVE_BUS)->get();
+    }
+
+    public function createDate($data)
+    {
+        try {
+            // Create a new trip record
+
+            if($data['route_id'] != null && ( $data['inbound_bus_id'] != null && $data['inbound_arrival_time'] != null && $data['inbound_departure_time'] != null )){
+               
+                $trip = Trip::create([
+                    'route_id' => $data['route_id'],
+                    'bus_id' => $data['inbound_bus_id'],
+                    'direction' => 'Inbound',
+                    'departure_time' => Carbon::parse($data['inbound_arrival_time']),
+                    'arrival_time' => Carbon::parse($data['inbound_departure_time']),
+                ]);
+            
+            }if($data['route_id'] != null && ($data['outbound_bus_id'] != null && $data['outbound_arrival_time'] != null && $data['outbound_departure_time'] != null)){
+                $trip = Trip::create([
+                    'route_id' => $data['route_id'],
+                    'bus_id' => $data['outbound_bus_id'],
+                    'direction' => 'Outbound',
+                    'departure_time' => Carbon::parse($data['outbound_arrival_time']),
+                    'arrival_time' => Carbon::parse($data['outbound_departure_time']),
+                ]);
+            }
+            
+            if($data['route_id']){ 
+                $route = Route::find($data['route_id']);
+            }else{
+                $route = null;
+            }
+           
+            // Return a success response
+            return ['success' => true, 'route' => $route] ;
+        } catch (\Exception $e) {
+            // Handle the exception
+            Log::error($e->getMessage()); // Log the exception for debugging
+            return ['success' => false];
+        }
+    }
+    
+
+    public function updateTripStatus($data)
+    {
+        try {
+            $tripId = $data['tripId'];
+            $newStatus = $data['newStatus'];
+       
+            // Update the route status in the database
+            $route = Trip::find($tripId);
+            $route->status = $newStatus;
+            $route->save();
+         
+            // Return a success response
+            return ['success' => true];
+        } catch (\Exception $e) {
+            // Handle the exception 
+            dd($e->getMessage());
+            Log::error($e->getMessage()); // Log the exception for debugging
+            return ['success' => false];
+        }
+    }
+}

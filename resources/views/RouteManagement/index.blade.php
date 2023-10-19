@@ -21,53 +21,48 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="create-button">
-                            <a href="{{route('bus.create')}}" class="btn btn-success">Create New Bus</a>
+                            <a href="{{route('route.create')}}" class="btn btn-success">Create New Route</a>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header bg-success text-white">List of Buses</div>
+                                    <div class="card-header bg-success text-white">List of Routes</div>
                                     @if(session('success'))
                                         <div class="alert alert-success">
                                             {{ session('success') }}
                                         </div>
                                     @endif
-                                    @if($buses->count() > 0)
+                                    @if($routes->count() > 0)
                                         <div class="card-body">
-                                            <!-- Display a table with a list of buses -->
+                                            <!-- Display a table with a list of routes -->
                                             <table class="table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th>Id</th>
-                                                        <th>Bus Number</th>
-                                                        <th>Manufacturer</th>
-                                                        <th>Seating Capacity</th>
-                                                        <th>AC</th>
-                                                        <th>Insuarance Expire Date</th>
+                                                        <th>Route Number</th>
+                                                        <th>Description</th>
+                                                        <th>Start Outbound</th>
+                                                        <th>End Outbound</th>
+                                                        <th>Start Inbound</th>
+                                                        <th>End Inbound</th>
                                                         <th>Status</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($buses as $bus)
+                                                    @foreach ($routes as $route)
                                                         <tr>
-                                                            <td>{{ $bus->id }}</td>
-                                                            <td>{{ $bus->bus_number }}</td>
-                                                            <td>{{ $bus->busAttribute->manufacturer }}</td>
-                                                            <td>{{ $bus->busAttribute->seating_capacity }}</td>
-                                                            <td>
-                                                                @if($bus->busAttribute->ac == 1)
-                                                                    AC
-                                                                @else
-                                                                    Non AC
-                                                                @endif
-                                                            </td>
-
-                                                            <td>{{ $bus->busAttribute->insurance_expireDate }}</td>
+                                                            <td>{{ $route->id }}</td>
+                                                            <td>{{ $route->route_number }}</td>
+                                                            <td>{{ $route->description }}</td>
+                                                            <td>{{ $route->start_point_outbound }}</td>
+                                                            <td>{{ $route->end_point_outbound }}</td>
+                                                            <td>{{ $route->start_point_inbound }}</td>
+                                                            <td>{{ $route->end_point_inbound }}</td>
                                                             <td>
                                                                 <!-- Toggle button for status -->
                                                                 <label class="switch">
-                                                                    <input type="checkbox" id="busStatus{{ $bus->id }}"  @if($bus->status == \App\Models\Bus::ACTIVE_BUS) checked @endif>
+                                                                    <input type="checkbox" id="routeStatus{{ $route->id }}"  @if($route->status == \App\Models\Route::ACTIVE_ROUTE) checked @endif>
                                                                     <span class="slider round"></span>
                                                                 </label>
                                                             </td>
@@ -75,7 +70,7 @@
                                                                 <!-- Action buttons -->
                                                                 <a href="#" class="btn btn-primary">View</a>
                                                                 <a href="#" class="btn btn-warning">Edit</a>
-                                                                <a href="#" class="btn btn-danger">Maintenance</a>
+                                                                <a href="#" class="btn btn-danger">Add Trip</a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -83,7 +78,7 @@
                                             </table>
                                             <div class="d-flex justify-content-center">
                                                 <!-- Pagination links -->
-                                                @if($buses->count() > 0){{ $buses->links('pagination') }}@endif
+                                                @if($routes->count() > 0){{ $routes->links('pagination') }}@endif
                                             </div>
                                         </div>
                                     @else
@@ -112,12 +107,12 @@
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: 'bus/update-bus-status', // Adjust the URL to match your route
+            url: 'route/update-route-status', // Adjust the URL to match your route
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': csrfToken
             },
-            data: JSON.stringify({ newStatus, busId: checkboxId.replace('busStatus', '') }),
+            data: JSON.stringify({ newStatus, routeId: checkboxId.replace('routeStatus', '') }),
             contentType: 'application/json',
             dataType: 'json',
             success: function(data) {

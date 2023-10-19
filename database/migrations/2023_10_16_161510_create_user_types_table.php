@@ -15,8 +15,8 @@ class CreateUserTypesTable extends Migration
     {
         Schema::create('user_types', function (Blueprint $table) {
             $table->id(); // Auto-incremental primary key
-            $table->string('UserType', 255); // VARCHAR(255) column
-            $table->tinyInteger('Status')->default(1)->comment('1 = active, 2 = deactive');
+            $table->string('user_type', 255); // VARCHAR(255) column
+            $table->tinyInteger('status')->default(1)->comment('1 = active, 2 = deactive');
             $table->timestamps(); // Created at and updated at timestamps
         });
     }

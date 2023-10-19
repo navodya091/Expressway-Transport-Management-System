@@ -17,7 +17,7 @@ class BusesTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             DB::table('buses')->insert([
                 'driver_id' => $i,
                 'bus_attribute_id' => $i,

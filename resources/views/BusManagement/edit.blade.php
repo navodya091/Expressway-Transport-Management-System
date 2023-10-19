@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-success text-white">Update Bus</div>
+                    <div class="card-header bg-success text-white">Edit Bus</div>
                     <div class="card-body">
                         @if(session('error'))
                             <div class="alert alert-danger">

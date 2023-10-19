@@ -8,7 +8,7 @@ class UserUpdateRequest extends FormRequest
 {
     public function authorize()
     {
-        return true; // You can set authorization rules if needed
+        return true; 
     }
 
     public function rules()

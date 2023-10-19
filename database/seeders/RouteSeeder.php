@@ -17,7 +17,7 @@ class RouteSeeder extends Seeder
             'end_point_outbound' => 'NITTABUWA',
             'start_point_inbound' => 'NITTABUWA',
             'end_point_inbound' => 'GAMPAHA',
-            'status' => 1, // You can change this value as needed
+            'status' => 1, 
         ],
         [
             'route_number' => 'Route B ',
@@ -26,7 +26,7 @@ class RouteSeeder extends Seeder
             'end_point_outbound' => 'MATARA',
             'start_point_inbound' => 'MATARA',
             'end_point_inbound' => 'COLOMBO',
-            'status' => 1, // You can change this value as needed
+            'status' => 1, 
         ],[
             'route_number' => 'Route C ',
             'description' => 'One Trip Per day',
@@ -34,7 +34,7 @@ class RouteSeeder extends Seeder
             'end_point_outbound' => 'MATARA',
             'start_point_inbound' => 'MATARA',
             'end_point_inbound' => 'COLOMBO',
-            'status' => 1, // You can change this value as needed
+            'status' => 1, 
         ]);
 
     }

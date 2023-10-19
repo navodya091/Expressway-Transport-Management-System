@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header bg-primary text-white">Update User</div>
+                <div class="card-header bg-primary text-white">View User</div>
                 <div class="card-body">
                     
                     <div class="form-group">

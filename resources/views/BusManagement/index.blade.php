@@ -5,7 +5,7 @@
        /* CSS file */
 
         .table th {
-            font-size: 12px; /* Adjust the font size as needed */
+            font-size: 12px; 
         }
 
         .icon-button {

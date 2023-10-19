@@ -18,19 +18,25 @@ class ReportRepository
                 $timeQuery->whereBetween('departure_time', [
                     $filter->input('from_time'),
                     $filter->input('to_time')
-                ])->orWhereBetween('arrival_time', [
-                    $filter->input('from_time'),
-                    $filter->input('to_time')
                 ]);
             });
         })
         ->when($filter->filled('from_city'), function ($query) use ($filter) {
             $fromCity = $filter->input('from_city');
-            $query->where(function ($fromCityQuery) use ($fromCity) {
-                $fromCityQuery->where('start_point_outbound', $fromCity)
-                             ->orWhere('start_point_inbound', $fromCity);
+            $query->whereHas('route',function ($fromCityQuery) use ($fromCity) {
+                $fromCityQuery->where('start_point_outbound', (int)$fromCity)
+                             ->orWhere('start_point_inbound', (int)$fromCity);
             });
         })
+
+        ->when($filter->filled('to_city'), function ($query) use ($filter) {
+            $toCity = $filter->input('to_city');
+            $query->whereHas('route',function ($toCityQuery) use ($toCity) {
+                $toCityQuery->where('end_point_outbound', (int)$toCity)
+                             ->orWhere('end_point_inbound', (int)$toCity);
+            });
+        })
+        
         ->when($filter->filled('route_number'), function ($query) use ($filter) {
             $query->whereHas('route', function ($subQuery) use ($filter) {
                 $subQuery->where('route_number', $filter->input('route_number'));
@@ -51,6 +57,7 @@ class ReportRepository
                 $subQuery->where('bus_number', $filter->input('bus_number'));
             });
         })
+       
         ->with(['bus.busAttribute', 'bus.user']);
 
          if ($paginate == true) {

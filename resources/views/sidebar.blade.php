@@ -24,7 +24,7 @@
 
             <li class="nav-item">
                 <a class="nav-link" style="{{ request()->routeIs('bus.index') ? 'color: red; font-weight: bold;' : '' }}" href="{{ route('bus.index') }}">
-                    Bus Information
+                    Bus Management
                 </a>
             </li>
   
@@ -45,7 +45,7 @@
                 <li class="nav-item">
                     <a class="nav-link" style="{{ request()->routeIs('report.index') ? 'color: red; font-weight: bold;' : '' }}" href="{{ route('report.index') }}">
                 
-                        Report Management
+                        Report Generation
                     </a>
                 </li>
             @endif

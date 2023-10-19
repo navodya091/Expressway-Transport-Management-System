@@ -14,7 +14,7 @@
                 </li>
             @endif
 
-            @if(auth()->user()->user_type_id === App\Models\UserType::USER_TYPE_IT_ADMIN)
+            @if(auth()->user()->user_type_id === App\Models\UserType::USER_TYPE_IT_ADMIN || App\Models\UserType::USER_TYPE_OWNER || auth()->user()->user_type_id === App\Models\UserType::USER_TYPE_MANAGER)
                 <li class="nav-item">
                     <a class="nav-link" >
                         User Management
@@ -43,7 +43,7 @@
             </li>
             @if(auth()->user()->user_type_id === App\Models\UserType::USER_TYPE_OWNER || auth()->user()->user_type_id === App\Models\UserType::USER_TYPE_MANAGER)
                 <li class="nav-item">
-                    <a class="nav-link" >
+                    <a class="nav-link" style="{{ request()->routeIs('report.index') ? 'color: red; font-weight: bold;' : '' }}" href="{{ route('report.index') }}">
                 
                         Report Management
                     </a>

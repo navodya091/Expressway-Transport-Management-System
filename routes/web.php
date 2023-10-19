@@ -17,23 +17,24 @@ use App\Models\UserType;
 
 //Auth routes
 Route::namespace('App\Http\Controllers\Auth')->group(function () {
-    Route::get('/', 'LoginController@loginView')->name('login.view');
+    Route::get('/', 'LoginController@loginView')->name('login.show');
     Route::post('/login', 'LoginController@login')->name('login');
     Route::post('/logout', 'LoginController@logout')->name('logout');
-    // Define more routes for other dashboard sections
+    
 });
 
 Route::namespace('App\Http\Controllers')->middleware('auth')->group(function () {
     Route::get('/home', 'HomePageController@index')->name('home');
-    // Define more routes for other dashboard sections
+    
 });
+
 
 Route::middleware(['auth', 'user.type:' . UserType::USER_TYPE_MANAGER . '|' . UserType::USER_TYPE_OWNER])
     ->namespace('App\Modules\Dashboard\Controllers')
     ->group(function () {
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-        // Define more routes for other dashboard sections
-    });
+        
+});
 
 
 Route::prefix('bus')->namespace('App\Modules\BusManagement\Controllers')->middleware('auth')->group(function () {
@@ -41,7 +42,7 @@ Route::prefix('bus')->namespace('App\Modules\BusManagement\Controllers')->middle
     Route::get('/create', 'BusController@create')->name('bus.create');
     Route::post('/store', 'BusController@store')->name('bus.store');
     Route::post('/update-bus-status', 'BusController@updateBusStatus')->name('bus.status');
-    // Define more routes for other dashboard sections
+    
 });
 
 Route::prefix('route')->namespace('App\Modules\RouteManagement\Controllers')->middleware('auth')->group(function () {
@@ -49,7 +50,7 @@ Route::prefix('route')->namespace('App\Modules\RouteManagement\Controllers')->mi
     Route::get('/create', 'RouteController@create')->name('route.create');
     Route::post('/store', 'RouteController@store')->name('route.store');
     Route::post('/update-route-status', 'RouteController@updateRouteStatus')->middleware('auth')->name('route.status');
-    // Define more routes for other dashboard sections
+    
 });
 
 Route::prefix('trip')->namespace('App\Modules\TripManagement\Controllers')->middleware('auth')->group(function () {
@@ -57,5 +58,14 @@ Route::prefix('trip')->namespace('App\Modules\TripManagement\Controllers')->midd
     Route::get('/create/{route_id}', 'TripController@create')->name('trip.create');
     Route::post('/store', 'TripController@store')->name('trip.store');
     Route::post('/update-trip-status', 'TripController@updateTripStatus')->name('trip.status');
-    // Define more routes for other dashboard sections
+    
+});
+
+Route::prefix('report')->middleware(['auth', 'user.type:' . UserType::USER_TYPE_MANAGER . '|' . UserType::USER_TYPE_OWNER])
+    ->namespace('App\Modules\ReportManagement\Controllers')
+    ->group(function () {
+        Route::get('/', 'ReportController@index')->name('report.index');
+        Route::get('/generate-report', 'ReportController@generateReport')->name('report.generate');
+
+        
 });

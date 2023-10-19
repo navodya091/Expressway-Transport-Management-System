@@ -6,6 +6,7 @@ use App\Modules\BusManagement\Repositories\BusRepository; // Import the BusRepos
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\BusCreateRequest;
+use App\Http\Requests\BusUpdateRequest;
 
 
 class BusController extends Controller
@@ -30,14 +31,32 @@ class BusController extends Controller
         return view('BusManagement.create', ['drivers' => $drivers]);
     }
 
+    public function edit($id)
+    {
+        $buse = $this->busRepository->getById($id);
+        $drivers = $this->busRepository->getAllBusDrivers();
+        return view('BusManagement.edit', ['drivers' => $drivers, 'bus' => $buse]);
+    }
+
     public function store(BusCreateRequest $request)
     {
-        $data = $this->busRepository->createDate($request->all());
+        $data = $this->busRepository->createData($request->all());
 
         if ($data['success']) {
             return redirect()->route('bus.index')->with('success', 'Bus created successfully.');
         } else {
             return redirect()->back()->with('error', 'Failed to create a new bus. Please try again.');
+        }
+    }
+
+    public function update(BusUpdateRequest $request, $id)
+    {
+        $data = $this->busRepository->updateData($request->all(), $id);
+
+        if ($data['success']) {
+            return redirect()->route('bus.index')->with('success', 'Bus update successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to update bus. Please try again.');
         }
     }
 

@@ -74,7 +74,7 @@
                                                             <td>
                                                                 <!-- Action buttons -->
                                                                 <a href="#" class="btn btn-primary">View</a>
-                                                                <a href="#" class="btn btn-warning">Edit</a>
+                                                                <a href="{{route('bus.edit',$bus->id)}}" class="btn btn-warning">Edit</a>
                                                                 <a href="#" class="btn btn-danger">Maintenance</a>
                                                             </td>
                                                         </tr>

@@ -16,7 +16,12 @@ class BusRepository
         return Bus::with('busAttribute')->paginate($perPage);
     }
 
-    public function createDate($data)
+    public function getById($id)
+    {
+        return Bus::with('busAttribute')->where('id',$id)->first();
+    }
+
+    public function createData($data)
     {
         DB::beginTransaction();
         try {
@@ -52,6 +57,40 @@ class BusRepository
             return ['success' => false];
         }
     }
+
+
+    public function updateData($data, $id)
+    {
+        DB::beginTransaction();
+        try {
+            // Find the bus record by ID and update
+            Bus::findOrFail($id)->update([
+                'bus_number' => $data['bus_number'],
+                'driver_id' => $data['driver_id'],
+            ]);
+
+            // Find the bus_attribute record by bus_id and update
+            $busAttribute = BusAttribute::where('bus_id', $id)->firstOrFail();
+            $busAttribute->update([
+                'manufacturer' => $data['manufacturer'],
+                'year_of_manufacture' => $data['manufacture_year'],
+                'seating_capacity' => $data['seating_capacity'],
+                'ac' => $data['ac'],
+                'insurance_expireDate' => $data['insurance_expire_date'],
+                'fuel_type' => $data['fuel_type'],
+            ]);
+
+            // Return a success response
+            DB::commit();
+            return ['success' => true];
+        } catch (\Exception $e) {
+            // Handle the exception
+            DB::rollBack();
+            Log::error($e->getMessage()); // Log the exception for debugging
+            return ['success' => false];
+        }
+    }
+
 
 
     public function getAllBusDrivers()

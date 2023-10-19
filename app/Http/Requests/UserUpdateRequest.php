@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserCreateRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -16,11 +16,10 @@ class UserCreateRequest extends FormRequest
         return [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'phone' => 'required|digits:10|numeric|unique:users,phone',
-            'nic' => ['required','regex:/^(?:\d{9}[xXvV]|\d{12})$/'],
-            'password' => 'required|string|min:8|confirmed',
-            'user_type' => 'required', 
+            'email' => 'required|email|unique:users,email,' . $this->route('id'),
+            'phone' => 'required|digits:10|numeric|unique:users,phone,' .  $this->route('id'),              
+            'nic' => ['required', 'regex:/^(?:\d{9}[xXvV]|\d{12})$/'],
+            'user_type' => 'required',
         ];
     }
 }

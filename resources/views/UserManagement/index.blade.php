@@ -67,7 +67,7 @@
                                                             <td>
                                                                 <!-- Action buttons (You can link to user view, edit, and delete pages) -->
                                                                 <a href="" class="btn btn-primary">View</a>
-                                                                <a href="" class="btn btn-warning">Edit</a>
+                                                                <a href="{{route('user.edit',$user->id)}}" class="btn btn-warning">Edit</a>
                                                                 <!-- You can add a button for deleting users -->
                                                             </td>
                                                         </tr>

@@ -6,6 +6,8 @@ use App\Modules\UserManagement\Repositories\UserRepository; // Import the UserRe
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
+
 
 
 class UserController extends Controller
@@ -32,10 +34,27 @@ class UserController extends Controller
 
     public function store(UserCreateRequest $request)
     {
-        $data = $this->userRepository->createDate($request->all());
+        $data = $this->userRepository->createData($request->all());
 
         if ($data['success']) {
             return redirect()->route('user.index')->with('success', 'User created successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to create a new user. Please try again.');
+        }
+    }
+
+    public function edit($id)
+    {
+        $user = $this->userRepository->getById($id);
+        $userTypes = $this->userRepository->getAllUserTypes();
+        return view('UserManagement.edit', ['userTypes' => $userTypes,'user'=> $user]);
+    }
+
+    public function update(UserUpdateRequest $request, $id)
+    {
+        $data = $this->userRepository->updateData($request->all(), $id);
+        if ($data['success']) {
+            return redirect()->route('user.index')->with('success', 'User updated successfully.');
         } else {
             return redirect()->back()->with('error', 'Failed to create a new user. Please try again.');
         }

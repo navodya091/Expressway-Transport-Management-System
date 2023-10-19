@@ -55,10 +55,10 @@
                                                             <td>{{ $route->id }}</td>
                                                             <td>{{ $route->route_number }}</td>
                                                             <td>{{ $route->description }}</td>
-                                                            <td>{{ $route->start_point_outbound }}</td>
-                                                            <td>{{ $route->end_point_outbound }}</td>
-                                                            <td>{{ $route->start_point_inbound }}</td>
-                                                            <td>{{ $route->end_point_inbound }}</td>
+                                                            <td>{{ $route->startOutboundCity->city_name}}</td>
+                                                            <td>{{ $route->endOutboundCity->city_name}}</td>
+                                                            <td>{{ $route->startInboundCity->city_name}}</td>
+                                                            <td>{{ $route->endInboundCity->city_name}}</td>
                                                             <td>
                                                                 <!-- Toggle button for status -->
                                                                 <label class="switch">
@@ -69,7 +69,7 @@
                                                             <td>
                                                                 <!-- Action buttons -->
                                                                 <a href="#" class="btn btn-primary">View</a>
-                                                                <a href="#" class="btn btn-warning">Edit</a>
+                                                                <a href="{{route('route.edit',$route->id)}}" class="btn btn-warning">Edit</a>
                                                                 <a href="{{route('trip.create',$route->id)}}" class="btn btn-danger">Add Trip</a>
                                                             </td>
                                                         </tr>

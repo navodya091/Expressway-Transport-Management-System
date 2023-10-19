@@ -25,7 +25,7 @@ class RouteRepository
         return City::get();
     }
 
-    public function createDate($data)
+    public function createData($data)
     {
         DB::beginTransaction();
         try {
@@ -50,6 +50,35 @@ class RouteRepository
             return ['success' => false];
         }
     }
+
+    public function updateData($data, $id)
+    {
+        DB::beginTransaction();
+        try {
+            // Find the route record by ID
+            $route = Route::findOrFail($id);
+
+            // Update the route record
+            $route->update([
+                'route_number' => $data['route_number'],
+                'description' => $data['description'],
+                'start_point_outbound' => $data['start_outbound'],
+                'end_point_outbound' => $data['end_outbound'],
+                'start_point_inbound' => $data['start_inbound'],
+                'end_point_inbound' => $data['end_inbound'],
+            ]);
+
+            // Return a success response
+            DB::commit();
+            return ['success' => true, 'route' => $route];
+        } catch (\Exception $e) {
+            // Handle the exception
+            DB::rollBack();
+            Log::error($e->getMessage()); // Log the exception for debugging
+            return ['success' => false];
+        }
+    }
+
     
 
     public function updateRouteStatus($data)

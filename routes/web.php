@@ -41,6 +41,8 @@ Route::prefix('bus')->namespace('App\Modules\BusManagement\Controllers')->middle
     Route::get('/', 'BusController@index')->name('bus.index');
     Route::get('/create', 'BusController@create')->name('bus.create');
     Route::post('/store', 'BusController@store')->name('bus.store');
+    Route::get('/edit/{id}', 'BusController@edit')->name('bus.edit');
+    Route::post('/update/{id}', 'BusController@update')->name('bus.update');
     Route::post('/update-bus-status', 'BusController@updateBusStatus')->name('bus.status');
     
 });
@@ -49,6 +51,8 @@ Route::prefix('user')->namespace('App\Modules\UserManagement\Controllers')->midd
     Route::get('/', 'UserController@index')->name('user.index');
     Route::get('/create', 'UserController@create')->name('user.create');
     Route::post('/store', 'UserController@store')->name('user.store');
+    Route::get('/edit/{id}', 'UserController@edit')->name('user.edit');
+    Route::post('/update/{id}', 'UserController@update')->name('user.update');
     Route::post('/update-user-status', 'UserController@updateUserStatus')->name('user.status');
     
 });
@@ -57,6 +61,8 @@ Route::prefix('route')->namespace('App\Modules\RouteManagement\Controllers')->mi
     Route::get('/', 'RouteController@index')->name('route.index');
     Route::get('/create', 'RouteController@create')->name('route.create');
     Route::post('/store', 'RouteController@store')->name('route.store');
+    Route::get('/edit/{id}', 'RouteController@edit')->name('route.edit');
+    Route::post('/update/{id}', 'RouteController@update')->name('route.update');
     Route::post('/update-route-status', 'RouteController@updateRouteStatus')->middleware('auth')->name('route.status');
     
 });

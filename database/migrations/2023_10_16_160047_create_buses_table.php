@@ -17,9 +17,9 @@ class CreateBusesTable extends Migration
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('driver_id');
-            $table->unsignedInteger('bus_attribute_id');
+            $table->unsignedInteger('bus_attribute_id')->nullable();
             $table->string('bus_number');
-            $table->tinyInteger('Status', false, true)->default(1); // Default status is 1 (active)
+            $table->tinyInteger('status', false, true)->default(1); // Default status is 1 (active)
             $table->timestamps();
         });
 

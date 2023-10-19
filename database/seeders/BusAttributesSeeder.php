@@ -14,15 +14,15 @@ class BusAttributesSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             DB::table('bus_attributes')->insert([
-                'BusID' => $i,
-                'YearOfManufacture' => rand(2000, 2023),
-                'Manufacturer' => 'Manufacturer ' . $i,
-                'SeatingCapacity' => rand(30, 60),
-                'FuelType' => (rand(0, 1) == 0) ? 'diesel' : 'super diesel',
-                'AC' => (rand(0, 1) == 0) ? true : false,
-                'InsuranceExpireDate' => now()->addDays(rand(1, 365)),
+                'bus_id' => $i,
+                'year_of_manufacture' => rand(2000, 2023),
+                'manufacturer' => 'Manufacturer ' . $i,
+                'seating_capacity' => rand(30, 60),
+                'fuel_type' => (rand(0, 1) == 0) ? 'diesel' : 'super diesel',
+                'aC' => (rand(0, 1) == 0) ? true : false,
+                'insurance_expireDate' => now()->addDays(rand(1, 365)),
             ]);
         }
     }

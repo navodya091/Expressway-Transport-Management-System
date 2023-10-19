@@ -15,13 +15,13 @@ class CreateBusAttributesTable extends Migration
     {
         Schema::create('bus_attributes', function (Blueprint $table) {
             $table->id(); // Auto-incremental primary key
-            $table->integer('BusID');
-            $table->integer('YearOfManufacture')->nullable();
-            $table->string('Manufacturer', 255)->nullable();
-            $table->integer('SeatingCapacity')->nullable();
-            $table->string('FuelType', 255)->nullable();
-            $table->boolean('AC');
-            $table->date('InsuranceExpireDate')->nullable();
+            $table->integer('bus_id');
+            $table->integer('year_of_manufacture')->nullable();
+            $table->string('manufacturer', 255)->nullable();
+            $table->integer('seating_capacity')->nullable();
+            $table->string('fuel_type', 255)->nullable();
+            $table->boolean('ac');
+            $table->date('insurance_expireDate')->nullable();
             $table->timestamps(); // Created at and updated at timestamps
         });
     }

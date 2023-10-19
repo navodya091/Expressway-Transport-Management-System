@@ -12,7 +12,7 @@
                                 <div class="card mb-3">
                                     <div class="card-header bg-success text-white">Total Buses</div>
                                         <div class="card-body">
-                                            <h3 class="text-center">{{$data['buses']}}</h3>
+                                            <h3 class="text-center">{{$data != null && $data['buses'] != null ?  $data['buses'] : 0}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -20,7 +20,7 @@
                                 <div class="card mb-3">
                                     <div class="card-header bg-warning text-white">Total Data Entry Users</div>
                                     <div class="card-body">
-                                        <h3 class="text-center">{{$data['data_entry_users']}}</h3> 
+                                        <h3 class="text-center">{{$data != null && $data['data_entry_users'] != null ? $data['data_entry_users'] : 0}}</h3> 
                                     </div>
                                 </div>
                             </div>
@@ -28,7 +28,7 @@
                                 <div class="card mb-3">
                                     <div class="card-header bg-danger text-white">Total Drivers</div>
                                     <div class="card-body">
-                                        <h3 class="text-center">{{$data['drivers']}}</h3> 
+                                        <h3 class="text-center">{{$data != null && $data['drivers'] ? $data['drivers'] : 0}}</h3> 
                                     </div>
                                 </div>
                             </div>

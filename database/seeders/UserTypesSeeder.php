@@ -17,23 +17,23 @@ class UserTypesSeeder extends Seeder
         DB::table('user_types')->insert([
             [
                 'id' => 1,
-                'userType' => 'Owner',
+                'user_type' => 'Owner',
             ],
             [
                 'id' => 2,
-                'userType' => 'IT Admin',
+                'user_type' => 'IT Admin',
             ],
             [
                 'id' => 3,
-                'userType' => 'Manager',
+                'user_type' => 'Manager',
             ],
             [
                 'id' => 4,
-                'userType' => 'Driver',
+                'user_type' => 'Driver',
             ],
             [
                 'id' => 5,
-                'userType' => 'Data Entry User',
+                'user_type' => 'Data Entry User',
             ],
         ]);
     }

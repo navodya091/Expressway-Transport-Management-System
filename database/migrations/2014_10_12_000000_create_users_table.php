@@ -14,14 +14,15 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id(); // Auto-increment primary key
+            $table->id(); 
             $table->tinyInteger('user_type_id', false, true);
-            $table->string('password'); // Use a suitable data type to store the hash key (e.g., string)
+            $table->string('password'); 
             $table->string('nic');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
             $table->string('phone');
+            $table->tinyInteger('status')->default(1)->comment('1 = active, 2 = deactive');
 
             $table->timestamps();
 

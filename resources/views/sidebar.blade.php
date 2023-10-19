@@ -16,7 +16,7 @@
 
             @if(auth()->user()->user_type_id === App\Models\UserType::USER_TYPE_IT_ADMIN || App\Models\UserType::USER_TYPE_OWNER || auth()->user()->user_type_id === App\Models\UserType::USER_TYPE_MANAGER)
                 <li class="nav-item">
-                    <a class="nav-link" >
+                    <a class="nav-link" style="{{ request()->routeIs('user.index') ? 'color: red; font-weight: bold;' : '' }}" href="{{ route('user.index') }}" >
                         User Management
                     </a>
                 </li>

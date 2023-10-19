@@ -6,6 +6,7 @@ use App\Models\Bus;
 use App\Models\User;
 use App\Models\BusAttribute;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use App\Models\UserType;
 
 class BusRepository
@@ -17,6 +18,7 @@ class BusRepository
 
     public function createDate($data)
     {
+        DB::beginTransaction();
         try {
             // Create a new bus record
             $bus = Bus::create([
@@ -41,9 +43,11 @@ class BusRepository
             }
             
             // Return a success response
+            DB::commit();
             return ['success' => true];
         } catch (\Exception $e) {
             // Handle the exception
+            DB::rollBack();
             Log::error($e->getMessage()); // Log the exception for debugging
             return ['success' => false];
         }
@@ -58,6 +62,7 @@ class BusRepository
 
     public function updateBusStatus($data)
     {
+        DB::beginTransaction();
         try {
             $busId = $data['busId'];
             $newStatus = $data['newStatus'];
@@ -68,9 +73,11 @@ class BusRepository
             $bus->save();
          
             // Return a success response
+            DB::commit();
             return ['success' => true];
         } catch (\Exception $e) {
             // Handle the exception
+            DB::rollBack();
             Log::error($e->getMessage()); // Log the exception for debugging
             return ['success' => false];
         }

@@ -7,6 +7,7 @@ use App\Models\Bus;
 use Carbon\Carbon;
 use App\Models\Route;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 
 class TripRepository
@@ -23,6 +24,7 @@ class TripRepository
 
     public function createDate($data)
     {
+        DB::beginTransaction();
         try {
             // Create a new trip record
 
@@ -53,9 +55,11 @@ class TripRepository
             }
            
             // Return a success response
+            DB::commit();
             return ['success' => true, 'route' => $route] ;
         } catch (\Exception $e) {
             // Handle the exception
+            DB::rollBack();
             Log::error($e->getMessage()); // Log the exception for debugging
             return ['success' => false];
         }
@@ -64,20 +68,22 @@ class TripRepository
 
     public function updateTripStatus($data)
     {
+        DB::beginTransaction();
         try {
             $tripId = $data['tripId'];
             $newStatus = $data['newStatus'];
        
-            // Update the route status in the database
+            // Update the trip status in the database
             $route = Trip::find($tripId);
             $route->status = $newStatus;
             $route->save();
          
             // Return a success response
+            DB::commit();
             return ['success' => true];
         } catch (\Exception $e) {
             // Handle the exception 
-            dd($e->getMessage());
+            DB::rollBack();
             Log::error($e->getMessage()); // Log the exception for debugging
             return ['success' => false];
         }

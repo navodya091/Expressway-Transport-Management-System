@@ -74,7 +74,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="outbound_departure_time">Departure Time</label>
-                                                <input type="time" name "outbound_departure_time" class="form-control" value="{{ old('outbound_departure_time') }}">
+                                                <input type="time" name = "outbound_departure_time" class="form-control" value="{{ old('outbound_departure_time') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">

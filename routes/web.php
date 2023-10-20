@@ -68,8 +68,8 @@ Route::prefix('route')->namespace('App\Modules\RouteManagement\Controllers')->mi
     Route::post('/store', 'RouteController@store')->name('route.store');
     Route::get('/edit/{id}', 'RouteController@edit')->name('route.edit');
     Route::post('/update/{id}', 'RouteController@update')->name('route.update');
-    Route::post('/update-route-status', 'RouteController@updateRouteStatus')->middleware('auth')->name('route.status');
-    Route::delete('/delete/{id}', 'RouteController@delete')->middleware('auth')->name('route.delete');
+    Route::post('/update-route-status', 'RouteController@updateRouteStatus')->name('route.status');
+    Route::delete('/delete/{id}', 'RouteController@delete')->name('route.delete');
     
 });
 
@@ -81,7 +81,7 @@ Route::prefix('trip')->namespace('App\Modules\TripManagement\Controllers')->midd
     Route::get('/edit/{id}', 'TripController@edit')->name('trip.edit');
     Route::post('/update/{id}', 'TripController@update')->name('trip.update');
     Route::post('/update-trip-status', 'TripController@updateTripStatus')->name('trip.status');
-    Route::delete('/delete/{id}', 'TripController@delete')->middleware('auth')->name('trip.delete');
+    Route::delete('/delete/{id}', 'TripController@delete')->name('trip.delete');
     
 });
 

@@ -64,10 +64,9 @@ class TripController extends Controller
         if ($request->input('action') == 'save') {
             // Handle the "Save" button logic
             $data = $this->tripRepository->createData($request->all());
-           
+        
             if ($data['success']) {
-                return redirect()->route('trip.create', ['route_id' => $data['route']['id'], 'route' => $data['route']])
-                    ->with('success', 'Trip created successfully.');
+                return redirect()->route('trip.create', ['id' => $data['route']['id'], 'route' => $data['route']]);
             } else {
                 return redirect()->back()->with('error', 'Failed to create a new trip. Please try again.');
             }
